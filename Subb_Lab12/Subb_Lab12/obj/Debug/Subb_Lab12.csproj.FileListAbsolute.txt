@@ -1,0 +1,13 @@
+E:\Everything\вшэ\Программирование\Lab_12_Collections\Subb_Lab12\Subb_Lab12\bin\Debug\Subb_Lab12.exe.config
+E:\Everything\вшэ\Программирование\Lab_12_Collections\Subb_Lab12\Subb_Lab12\bin\Debug\Subb_Lab12.exe
+E:\Everything\вшэ\Программирование\Lab_12_Collections\Subb_Lab12\Subb_Lab12\bin\Debug\Subb_Lab12.pdb
+E:\Everything\вшэ\Программирование\Lab_12_Collections\Subb_Lab12\Subb_Lab12\obj\Debug\Subb_Lab12.csprojResolveAssemblyReference.cache
+E:\Everything\вшэ\Программирование\Lab_12_Collections\Subb_Lab12\Subb_Lab12\obj\Debug\Subb_Lab12.csproj.CoreCompileInputs.cache
+E:\Everything\вшэ\Программирование\Lab_12_Collections\Subb_Lab12\Subb_Lab12\obj\Debug\Subb_Lab12.exe
+E:\Everything\вшэ\Программирование\Lab_12_Collections\Subb_Lab12\Subb_Lab12\obj\Debug\Subb_Lab12.pdb
+F:\Lab_12_Collections\Subb_Lab12\Subb_Lab12\bin\Debug\Subb_Lab12.exe.config
+F:\Lab_12_Collections\Subb_Lab12\Subb_Lab12\obj\Debug\Subb_Lab12.exe
+F:\Lab_12_Collections\Subb_Lab12\Subb_Lab12\obj\Debug\Subb_Lab12.pdb
+F:\Lab_12_Collections\Subb_Lab12\Subb_Lab12\bin\Debug\Subb_Lab12.exe
+F:\Lab_12_Collections\Subb_Lab12\Subb_Lab12\bin\Debug\Subb_Lab12.pdb
+F:\Lab_12_Collections\Subb_Lab12\Subb_Lab12\obj\Debug\Subb_Lab12.csprojResolveAssemblyReference.cache
