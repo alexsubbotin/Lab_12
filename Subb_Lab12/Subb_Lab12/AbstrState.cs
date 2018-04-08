@@ -127,30 +127,6 @@ namespace Subb_Lab12
             return result;
         }
 
-        // Operator ==.
-        public static bool operator ==(AbstrState ob1, AbstrState ob2)
-        {
-            bool equal = false;
-
-            if (ob1.Name == ob2.Name && ob1.LeaderName == ob2.LeaderName &&
-                ob1.Population == ob2.Population && ob1.Age == ob2.Age && ob1.Continent == ob2.Continent)
-                equal = true;
-
-            return equal;
-        }
-
-        // Operator !=.
-        public static bool operator !=(AbstrState ob1, AbstrState ob2)
-        {
-            bool unequal = false;
-
-            if (ob1.Name != ob2.Name || ob1.LeaderName != ob2.LeaderName ||
-                ob1.Population != ob2.Population || ob1.Age != ob2.Age || ob1.Continent != ob2.Continent)
-                unequal = true;
-
-            return unequal;
-        }
-
         // Redefenition of the Equals method (for == and != of DicPoint).
         public override bool Equals(object ob)
         {

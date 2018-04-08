@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace Subb_Lab12
 {
     // My collection – dictionary (hash-table).
-    class MyDictionary<K, T>
+    class MyDictionary<K, T> : IEnumerable where T : AbstrState
     {
         // Array of the DicPoint elements (hash-table).
         DicPoint<K, T>[] table;
+        public DicPoint<K, T>[] Table { get; set; }
 
         // The hash-table capacity.
         int capacity;
@@ -62,9 +64,14 @@ namespace Subb_Lab12
             }
             set
             {
-                keys = new K[value.Length];
-                for (int i = 0; i < value.Length; i++)
-                    keys[i] = value[i];
+                if (value != null)
+                {
+                    keys = new K[value.Length];
+                    for (int i = 0; i < value.Length; i++)
+                        keys[i] = value[i];
+                }
+                else
+                    keys = value;
             }
         }
 
@@ -78,9 +85,14 @@ namespace Subb_Lab12
             }
             set
             {
-                values = new T[value.Length];
-                for (int i = 0; i < value.Length; i++)
-                    values[i] = value[i];
+                if (value != null)
+                {
+                    values = new T[value.Length];
+                    for (int i = 0; i < value.Length; i++)
+                        values[i] = value[i];
+                }
+                else
+                    values = value;
             }
         }
 
@@ -89,7 +101,9 @@ namespace Subb_Lab12
         public MyDictionary()
         {
             // Initital capacity is 100.
-            table = new DicPoint<K, T>[100];
+            Table = new DicPoint<K, T>[100];
+            for (int i = 0; i < Table.Length; i++)
+                Table[i] = new DicPoint<K, T>();
             Capacity = 100;
             Count = 0;
             Keys = null;
@@ -98,7 +112,9 @@ namespace Subb_Lab12
         // Constructor with a capacity parameter.
         public MyDictionary(int capacity)
         {
-            table = new DicPoint<K, T>[capacity];
+            Table = new DicPoint<K, T>[capacity];
+            for (int i = 0; i < Table.Length; i++)
+                Table[i] = new DicPoint<K, T>();
             this.Capacity = capacity;
             Count = 0;
             Keys = null;
@@ -107,10 +123,10 @@ namespace Subb_Lab12
         // Constructor with a MyDictionary object parameter.
         public MyDictionary(MyDictionary<K, T> dic)
         {
-            table = new DicPoint<K, T>[dic.table.Length];
-            for (int i = 0; i < dic.table.Length; i++)
+            Table = new DicPoint<K, T>[dic.Table.Length];
+            for (int i = 0; i < dic.Table.Length; i++)
             {
-                this.table[i] = dic.table[i];
+                this.Table[i] = dic.Table[i];
             }
 
             for (int i = 0; i < dic.Keys.Length; i++)
@@ -169,23 +185,24 @@ namespace Subb_Lab12
             int index = GetIndex(key);
 
             // If there are no objects with this index.
-            if (table[index] == null)
+            if (Table[index].value == null)
             {
-                table[index] = (DicPoint<K, T>)value;
+                DicPoint<K, T> buf = new DicPoint<K, T>((K)key, (T)value);
+                Table[index] = buf;
             }
             else
             {
                 // The first object in the list of this index.
-                DicPoint<K, T> current = table[index];
+                DicPoint<K, T> current = Table[index];
 
                 // If there is the same object.
-                if (current == dicPointBuffer)
+                if (current.Equals(dicPointBuffer))
                     return false;
 
                 // Finding the end of the list or the same object.
                 while (current.next != null)
                 {
-                    if (current == dicPointBuffer)
+                    if (current.Equals(dicPointBuffer))
                         return false;
                     current = current.next;
                 }
@@ -209,7 +226,7 @@ namespace Subb_Lab12
             double A = 0.12837912;
 
             // Creating the index.
-            int index = (int)Math.Truncate(Count * (((int)key * A) % 1));
+            int index = (int)Math.Truncate(Capacity * (((int)key * A) % 1));
 
             return index;
         }
@@ -217,13 +234,17 @@ namespace Subb_Lab12
         // Additional function to add an element to the array of keys.
         public void AddKey(K key)
         {
-            K[] buf = new K[Keys.Length + 1];
+            K[] buf;
+            if (Keys != null)
+                buf = new K[Keys.Length + 1];
+            else
+                buf = new K[1];
 
-            for (int i = 0; i < Keys.Length; i++)
+            for (int i = 0; i < buf.Length - 1; i++)
             {
                 buf[i] = Keys[i];
             }
-            buf[buf.Length] = key;
+            buf[buf.Length - 1] = key;
 
             Keys = buf;
         }
@@ -231,13 +252,17 @@ namespace Subb_Lab12
         // Additional function to add an element to the array of values.
         public void AddValue(T value)
         {
-            T[] buf = new T[Values.Length + 1];
+            T[] buf;
+            if (Values != null)
+                buf = new T[Values.Length + 1];
+            else
+                buf = new T[1];
 
-            for (int i = 0; i < Keys.Length; i++)
+            for (int i = 0; i < buf.Length - 1; i++)
             {
                 buf[i] = Values[i];
             }
-            buf[buf.Length] = value;
+            buf[buf.Length - 1] = value;
 
             Values = buf;
         }
@@ -245,7 +270,7 @@ namespace Subb_Lab12
         // Clear the dictionary.
         public void Clear()
         {
-            table = new DicPoint<K, T>[100];
+            Table = new DicPoint<K, T>[100];
             Capacity = 100;
             Count = 0;
             Keys = null;
@@ -253,7 +278,7 @@ namespace Subb_Lab12
         }
 
         // Clone the dictionary.
-        public MyDictionary<K,T> Clone()
+        public MyDictionary<K, T> Clone()
         {
             MyDictionary<K, T> buf = this;
             return buf;
@@ -266,9 +291,9 @@ namespace Subb_Lab12
             int index = -1;
 
             // Getting the index.
-            for(int i = 0; i < Values.Length; i++)
+            for (int i = 0; i < Values.Length; i++)
             {
-                if(Values[i].Equals((T)value))
+                if (Values[i].Equals((T)value))
                 {
                     index = i;
                     break;
@@ -278,11 +303,11 @@ namespace Subb_Lab12
             // If the elemet exists.
             if (index > -1)
             {
-                DicPoint<K, T> current = table[index];
+                DicPoint<K, T> current = Table[index];
 
                 // IF it's the first in the list.
                 if (current.value.Equals((T)value))
-                    table[index] = null;
+                    Table[index] = null;
                 else
                 {
                     // Looking till the end of the list.
@@ -303,6 +328,21 @@ namespace Subb_Lab12
             }
             else
                 return false;
+        }
+
+        // Redefinition of the GetEnumerator method.
+        public IEnumerator GetEnumerator()
+        {
+            for (int i = 0; i < Capacity; i++)
+            {
+                DicPoint<K, T> curr = Table[i];
+
+                while (curr != null)
+                {
+                    yield return curr;
+                    curr = curr.next;
+                }
+            }
         }
     }
 }

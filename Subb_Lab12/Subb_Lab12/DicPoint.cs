@@ -16,6 +16,14 @@ namespace Subb_Lab12
         // Next element with the same hash-code.
         public DicPoint<K, T> next;
 
+        // Constructor without parameters
+        public DicPoint()
+        {
+            value = default(T);
+            key = default(K);
+            next = null;
+        }
+
         // Constructor with a T parameter.
         public DicPoint(K key, T ob)
         {
@@ -24,22 +32,15 @@ namespace Subb_Lab12
             next = null;
         }
 
-        public static bool operator ==(DicPoint<K, T> ob1, DicPoint<K, T> ob2)
+        // Redefinition of the Equals method.
+        public override bool Equals(object obj)
         {
-            bool equal = false;
-            if (ob1.value.Equals(ob2.value) && ob1.key.Equals(ob2.key))
-                equal = true;
+            DicPoint<K, T> buf = (DicPoint<K, T>)obj;
 
-            return equal;
-        }
-
-        public static bool operator !=(DicPoint<K, T> ob1, DicPoint<K, T> ob2)
-        {
-            bool unequal = false;
-            if (ob1.value.Equals(ob2.value) || ob1.key.Equals(ob2.key))
-                unequal = true;
-
-            return unequal;
+            if (value.Equals(buf.value) && key.Equals(buf.key))
+                return true;
+            else
+                return false;
         }
     }
 }

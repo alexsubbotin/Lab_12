@@ -30,6 +30,9 @@ namespace Subb_Lab12
                     case 2:
                         Task2.Demonstrate();
                         break;
+                    case 3:
+                        Task3.Demonstrate();
+                        break;
                 }
             } while (choice != 4);
         }
