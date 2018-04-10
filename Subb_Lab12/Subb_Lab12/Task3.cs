@@ -57,7 +57,12 @@ namespace Subb_Lab12
                     case 6:
                         ClearDic(ref myDictionary);
                         break;
-                    
+                    case 7:
+                        CloneDic(myDictionary);
+                        break;
+                    case 8:
+                        RemoveFromDic(ref myDictionary);
+                        break;
                 }
 
                 Console.Clear();
@@ -102,7 +107,7 @@ namespace Subb_Lab12
             // Getting the count.
             int count = CountInput();
 
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 AbstrState random = RandomState();
 
@@ -145,7 +150,7 @@ namespace Subb_Lab12
                 {
                     Console.WriteLine("INDEX: {0}", i);
 
-                    if (myDictionary.Table[i] != null)
+                    if (myDictionary.Table[i].value != null)
                     {
                         DicPoint<int, AbstrState> curr = myDictionary.Table[i];
                         curr.value.Show();
@@ -283,12 +288,34 @@ namespace Subb_Lab12
         public static void ClearDic(ref MyDictionary<int, AbstrState> myDictionary)
         {
             myDictionary.Clear();
+            Console.WriteLine("The dictionary is clear now!\nPress ENTER to continue");
+            Console.ReadLine();
         }
 
         // Function to clone the dictionary.
-        public static void CloneDic(ref MyDictionary<int, AbstrState> myDictionary)
+        public static void CloneDic(MyDictionary<int, AbstrState> myDictionary)
         {
-            MyDictionary<int, AbstrState> shadowClone = myDictionary.Clone();
+            MyDictionary<int, AbstrState> shallowClone = myDictionary.Clone();
+
+            Console.WriteLine("Shadow clone of the dictionary:");
+            ShowDic(shallowClone);
+        }
+
+        // Function to remove an object.
+        public static void RemoveFromDic(ref MyDictionary<int, AbstrState> myDictionary)
+        {
+            AbstrState buf = ObjectInput();
+            DicPoint<int, AbstrState> obj = new DicPoint<int, AbstrState>(buf.Name.Length, buf);
+
+            bool ok = myDictionary.Remove(obj);
+
+            if (ok)
+
+                Console.WriteLine("The dictionary is clear now!\nPress ENTER to continue");
+            else
+                Console.WriteLine("There is no element with this value\nPress ENTER to continue");
+
+            Console.ReadLine();
         }
     }
 }
