@@ -54,6 +54,10 @@ namespace Subb_Lab12
                     case 5:
                         AddElem(ref myDictionary);
                         break;
+                    case 6:
+                        ClearDic(ref myDictionary);
+                        break;
+                    
                 }
 
                 Console.Clear();
@@ -117,7 +121,7 @@ namespace Subb_Lab12
             Monarchy monarchy = new Monarchy();
 
             // Creating the element.
-            for (int i = 0; i < rnd.Next(4, 14); i++)
+            for (int i = 0; i < rnd.Next(4, 20); i++)
             {
                 monarchy.Name += (char)rnd.Next(65, 91);
                 monarchy.LeaderName += (char)rnd.Next(97, 123);
@@ -135,21 +139,28 @@ namespace Subb_Lab12
         {
             Console.Clear();
 
-            for(int i = 0; i < myDictionary.Capacity; i++)
+            if (myDictionary.Count != 0)
             {
-                Console.WriteLine("INDEX: {0}", i);
-
-                if (myDictionary.Table[i].value != null)
+                for (int i = 0; i < myDictionary.Capacity; i++)
                 {
-                    DicPoint<int, AbstrState> curr = myDictionary.Table[i];
-                    curr.value.Show();
+                    Console.WriteLine("INDEX: {0}", i);
 
-                    while (curr.next != null)
+                    if (myDictionary.Table[i] != null)
                     {
-                        curr.next.value.Show();
-                        curr = curr.next;
+                        DicPoint<int, AbstrState> curr = myDictionary.Table[i];
+                        curr.value.Show();
+
+                        while (curr.next != null)
+                        {
+                            curr.next.value.Show();
+                            curr = curr.next;
+                        }
                     }
                 }
+            }
+            else
+            {
+                Console.WriteLine("The dictionary is empty");
             }
 
             Console.WriteLine("Press ENTER to continue");
@@ -266,6 +277,18 @@ namespace Subb_Lab12
 
             Console.WriteLine("The element is successfully added!\nPress ENTER to continue");
             Console.ReadLine();
+        }
+
+        // Function to clear the dictionary.
+        public static void ClearDic(ref MyDictionary<int, AbstrState> myDictionary)
+        {
+            myDictionary.Clear();
+        }
+
+        // Function to clone the dictionary.
+        public static void CloneDic(ref MyDictionary<int, AbstrState> myDictionary)
+        {
+            MyDictionary<int, AbstrState> shadowClone = myDictionary.Clone();
         }
     }
 }
