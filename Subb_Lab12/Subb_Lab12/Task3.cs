@@ -212,6 +212,9 @@ namespace Subb_Lab12
                 Console.WriteLine("There is an element with this value!");
             else
                 Console.WriteLine("There is no element with this value");
+
+            Console.WriteLine("Press ENTER to continue");
+            Console.ReadLine();
         }
 
         // Function to input a monarchy object.
@@ -304,14 +307,15 @@ namespace Subb_Lab12
         // Function to remove an object.
         public static void RemoveFromDic(ref MyDictionary<int, AbstrState> myDictionary)
         {
-            AbstrState buf = ObjectInput();
-            DicPoint<int, AbstrState> obj = new DicPoint<int, AbstrState>(buf.Name.Length, buf);
+            Console.Clear();
 
-            bool ok = myDictionary.Remove(obj);
+            AbstrState buf = ObjectInput();
+
+            bool ok = myDictionary.Remove(buf);
 
             if (ok)
 
-                Console.WriteLine("The dictionary is clear now!\nPress ENTER to continue");
+                Console.WriteLine("The element is removed!\nPress ENTER to continue");
             else
                 Console.WriteLine("There is no element with this value\nPress ENTER to continue");
 

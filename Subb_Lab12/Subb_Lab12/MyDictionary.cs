@@ -307,7 +307,10 @@ namespace Subb_Lab12
 
                 // IF it's the first in the list.
                 if (current.value.Equals((T)value))
+                {
                     Table[index] = null;
+                    Count--;
+                }
                 else
                 {
                     // Looking till the end of the list.
@@ -317,6 +320,7 @@ namespace Subb_Lab12
                         if (current.next.value.Equals((T)value))
                         {
                             current.next = current.next.next;
+                            Count--;
                             return true;
                         }
 
