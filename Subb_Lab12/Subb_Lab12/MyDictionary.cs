@@ -288,21 +288,31 @@ namespace Subb_Lab12
         public bool Remove(object value)
         {
             // Index of the element.
-            int index = -1;
+            int ind = -1;
 
             // Getting the index.
             for (int i = 0; i < Values.Length; i++)
             {
                 if (Values[i].Equals((T)value))
                 {
-                    index = i;
+                    ind = i;
                     break;
                 }
             }
 
             // If the elemet exists.
-            if (index > -1)
+            if (ind > -1)
             {
+                // Getting the key of the object.
+                object key = Keys[ind];
+                // Getting the index og the object.
+                int index = GetIndex(key);
+
+                // Deleting it from the Keys.
+                DelFromKeys(ind);
+                // Deleting it from the Values.
+                DelFromValues(ind);
+
                 DicPoint<K, T> current = Table[index];
 
                 // IF it's the first in the list.
@@ -332,6 +342,34 @@ namespace Subb_Lab12
             }
             else
                 return false;
+        }
+
+        // Deleting an element from the Keys.
+        public void DelFromKeys(int index)
+        {
+            K[] bufKeys = new K[Keys.Length - 1];
+
+            for (int i = 0; i < index; i++)
+                bufKeys[i] = Keys[i];
+
+            for (int i = index + 1; i < Keys.Length; i++)
+                bufKeys[i] = Keys[i];
+
+            Keys = bufKeys;
+        }
+
+        // Deleting an element from the Values.
+        public void DelFromValues(int index)
+        {
+            T[] bufValues = new T[Values.Length - 1];
+
+            for (int i = 0; i < index; i++)
+                bufValues[i] = Values[i];
+
+            for (int i = index + 1; i < Keys.Length; i++)
+                bufValues[i] = Values[i];
+
+            Values = bufValues;
         }
 
         // Redefinition of the GetEnumerator method.
