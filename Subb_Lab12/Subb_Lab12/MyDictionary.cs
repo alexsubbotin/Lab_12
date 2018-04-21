@@ -296,13 +296,16 @@ namespace Subb_Lab12
             // Index of the element.
             int ind = -1;
 
-            // Getting the index.
-            for (int i = 0; i < Values.Length; i++)
+            if (Values != null)
             {
-                if (Values[i].Equals((T)value))
+                // Getting the index.
+                for (int i = 0; i < Values.Length; i++)
                 {
-                    ind = i;
-                    break;
+                    if (Values[i].Equals((T)value))
+                    {
+                        ind = i;
+                        break;
+                    }
                 }
             }
 
