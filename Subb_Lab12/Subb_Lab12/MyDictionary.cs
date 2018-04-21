@@ -185,7 +185,7 @@ namespace Subb_Lab12
             int index = GetIndex(key);
 
             // If there are no objects with this index.
-            if (Table[index].value == null)
+            if (Table[index] == null || Table[index].value == null)
             {
                 DicPoint<K, T> buf = new DicPoint<K, T>((K)key, (T)value);
                 Table[index] = buf;

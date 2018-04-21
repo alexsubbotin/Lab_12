@@ -150,7 +150,7 @@ namespace Subb_Lab12
                 {
                     Console.WriteLine("INDEX: {0}", i);
 
-                    if (myDictionary.Table[i].value != null)
+                    if (myDictionary.Table[i] != null && myDictionary.Table[i].value != null)
                     {
                         DicPoint<int, AbstrState> curr = myDictionary.Table[i];
                         curr.value.Show();
@@ -241,6 +241,8 @@ namespace Subb_Lab12
                     Console.WriteLine("Input error! Perhaps you didn't enter a natural number");
             } while (!ok || buf < 0);
 
+            monarchy.Population = buf;
+
             // Age input.
             do
             {
@@ -249,6 +251,8 @@ namespace Subb_Lab12
                 if (!ok || buf < 0)
                     Console.WriteLine("Input error! Perhaps you didn't enter a natural number");
             } while (!ok || buf < 0);
+
+            monarchy.Age = buf;
 
             // Continent input.
             monarchy.Continent = ContinentsInput();
