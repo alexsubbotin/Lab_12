@@ -147,12 +147,15 @@ namespace Subb_Lab12
         public bool ContainsKey(object key)
         {
             bool contains = false;
-            for (int i = 0; i < this.Keys.Length; i++)
+            if (Keys != null)
             {
-                if (this.Keys[i].Equals((K)key))
+                for (int i = 0; i < this.Keys.Length; i++)
                 {
-                    contains = true;
-                    break;
+                    if (this.Keys[i].Equals((K)key))
+                    {
+                        contains = true;
+                        break;
+                    }
                 }
             }
 
@@ -163,12 +166,15 @@ namespace Subb_Lab12
         public bool ContainsValue(object value)
         {
             bool contains = false;
-            for (int i = 0; i < this.Values.Length; i++)
+            if (Values != null)
             {
-                if (this.Values[i].Equals((T)value))
+                for (int i = 0; i < this.Values.Length; i++)
                 {
-                    contains = true;
-                    break;
+                    if (this.Values[i].Equals((T)value))
+                    {
+                        contains = true;
+                        break;
+                    }
                 }
             }
 
@@ -202,7 +208,7 @@ namespace Subb_Lab12
                 // Finding the end of the list or the same object.
                 while (current.next != null)
                 {
-                    if (current.Equals(dicPointBuffer))
+                    if (current.next.Equals(dicPointBuffer))
                         return false;
                     current = current.next;
                 }
